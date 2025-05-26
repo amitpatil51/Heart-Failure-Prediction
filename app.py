@@ -3,8 +3,15 @@ import numpy as np
 import pickle
 
 # Load your trained model
-with open('ultimate_model.pkl', 'rb') as file:
-    model = pickle.load(file)
+try:
+    with open('ultimate_model.pkl', 'rb') as file:
+        model = pickle.load(file)
+    st.success("✅ Model loaded successfully!")
+except FileNotFoundError as e:
+    st.error(f"❌ File not found: {e}")
+except Exception as e:
+    st.error(f"❌ Error loading model: {e}")
+    st.write("Error type:", type(e).__name__)
 
 st.title("🫀 Heart Failure Risk Prediction")
 
